@@ -1,6 +1,7 @@
 import { node, linkedList } from "./lists.js";
 
-function HashMap(size) {
+function HashMap(s) {
+  let size = s;
   let myMap = new Array(size);
   let origSize = size;
   let loadFactor = 0.75;
@@ -10,6 +11,7 @@ function HashMap(size) {
 
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
+      console.log(`hash size is ${size}`);
       hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % size;
     }
     console.log(`${key} is ${hashCode}`);
@@ -30,7 +32,13 @@ function HashMap(size) {
     if (index < 0 || index >= size) {
       throw new Error("Trying to access index out of bound");
     }
-    if (size * loadFactor < length()) expand();
+    console.log(`size * loadfactor ${size * loadFactor}`);
+    if (size * loadFactor < length() + 1) {
+      console.log(`EXPANDING size is ${size}`);
+      expand();
+      console.log(`now size is ${size}`);
+      index = hash(key);
+    }
 
     if (myMap[index] == undefined || myMap[index].key == key) {
       myMap[index] = { key, data };
@@ -253,15 +261,34 @@ test.set("god", "is good");
 test.set("kite", "pink");
 test.set("lion", "golden");
 
-console.log(test);
+console.log(test.myMap);
 console.log(test.length());
 // console.log(test.get("frog"));
 // console.log(test.get("god"));
 // test.remove("lion");
 // console.log(test);
 // console.log(`has ice cream? ${test.has("ice cream")}`);
-test.keys();
-console.log(test.length());
-test.values();
+// test.keys();
+// console.log(test.length());
+// test.values();
+// console.log(test.myMap);
+// test.entries();
+test.set("moon", "silver");
 console.log(test.myMap);
-test.entries();
+console.log(test.length());
+test.set("moofn", "silver");
+test.set("mooen", "silver");
+test.set("moeeon", "silver");
+test.set("moeeofn", "silver");
+test.set("moeeeeon", "silver");
+test.set("apeple", "red");
+test.set("baneana", "yellow");
+test.set("carerot", "orange");
+test.set("dfog", "brown");
+test.set("eleephant", "gray");
+test.set("frfog", "green");
+test.set("grgape", "purple");
+test.set("hgat", "black");
+test.set("igce cream", "white");
+test.set("ggçod", "is good");
+console.log(test.myMap);
