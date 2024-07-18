@@ -79,7 +79,7 @@ function HashMap(size) {
     } else return false;
   };
 
-  //works, but what if we remove the last one in LL
+  //works, but what if we remove the last one in LL???
   const remove = (key) => {
     let index = hash(key);
     if (index < 0 || index >= size) {
@@ -208,8 +208,15 @@ function HashMap(size) {
     let allEntries = [];
     let k = 0;
     for (let i = 0; i < size; i++) {
-      if (myMap[i] != undefined) {
-        allEntries[k] = [myMap[i].key, myMap[i].value];
+      if (myMap[i] == undefined) {
+        //do nothing
+      } else if (myMap[i].hasOwnProperty("headNode")) {
+        for (let j = 0; j < myMap[i].size(); j++) {
+          allEntries[k] = [myMap[i].at(j).value.key, myMap[i].at(j).value.data];
+          k++;
+        }
+      } else if (myMap[i].key != undefined) {
+        allEntries[k] = [myMap[i].key, myMap[i].data];
         k++;
       }
     }
@@ -257,4 +264,4 @@ test.keys();
 console.log(test.length());
 test.values();
 console.log(test.myMap);
-// test.entries();
+test.entries();
